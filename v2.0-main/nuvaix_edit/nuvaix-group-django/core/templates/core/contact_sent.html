@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero"><div class="container"><div class="eyebrow"><span class="eyebrow-line"></span> ENQUIRY RECEIVED</div><h1>Thank <em>you.</em></h1><p>Your enquiry reference is <b>{{ result.ref }}</b>. Our team will reply to you using the details you gave.</p></div></section>
+<section class="section-pad"><div class="container sent-layout">
+  {% if result.whatsapp == 'sent' %}<div class="sent-card is-ok"><b>WhatsApp</b><p>Your enquiry was delivered to the NUVAIX team on WhatsApp. We'll reply on the number you provided.</p></div>{% endif %}
+  {% if result.whatsapp == 'manual' or result.whatsapp == 'failed' %}<div class="sent-card"><b>One more tap to reach us on WhatsApp</b><p>Your enquiry is saved. To message our team on WhatsApp straight away, open the chat below. Your message is already written, just press send.</p><a class="button button-gold" href="{{ result.wa_url }}" target="_blank" rel="noopener noreferrer">Open WhatsApp ↗</a></div>{% endif %}
+  {% if result.email == 'sent' %}<div class="sent-card is-ok"><b>Email</b><p>Your enquiry was emailed to our team. We'll reply to the email address you provided.</p></div>{% endif %}
+  {% if result.email == 'failed' or result.email == 'skipped' and result.mailto_url %}<div class="sent-card"><b>Email</b><p>Your enquiry is saved, but we couldn't email it automatically. You can send it from your own email app:</p><a class="button button-dark" href="{{ result.mailto_url }}">Open email app ↗</a></div>{% endif %}
+  <a class="text-link" href="{% url 'home' %}">← Back to home</a>
+</div></section>
+{% endblock %}
